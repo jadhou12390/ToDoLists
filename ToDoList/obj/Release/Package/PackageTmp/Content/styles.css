@@ -1,0 +1,33 @@
+﻿body {
+    background-color: #343a40;
+    color: #ffffff; 
+}
+
+.form-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+    .form-group label {
+        color: gray;
+    }
+
+    .form-group .btn-crt {
+        background-color: #ff6500;
+        color: black;
+    }
+
+.thead-dark th {
+    color: white;
+}
+
+.btn-upd {
+    background-color: #ff6500 !important;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    color: white;
+}

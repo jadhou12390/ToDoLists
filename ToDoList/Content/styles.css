@@ -1,0 +1,67 @@
+﻿body {
+    background-color: #343a40;
+    color: #ffffff; 
+}
+
+.form-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+    .form-group label {
+        color: gray;
+    }
+
+    .form-group .btn-crt {
+        background-color: #ff6500;
+        color: black;
+    }
+.notification-container {
+    position: absolute;
+    top: 65px;
+    align-items: center;
+    right: 10px;
+    z-index: 1000;
+}
+
+
+.thead-dark th {
+    color: white;
+}
+
+.btn-upd {
+    background-color: #ff6500 !important;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    color: white;
+}
+
+.role-radio {
+    margin-top: 8px; /* Adjust as needed */
+}
+
+.role-label {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #e9ecef; /* Set your desired background color */
+    border-radius: 4px;
+    margin-right: 10px; /* Adjust as needed */
+    cursor: pointer;
+}
+
+.role-input {
+    display: none; /* Hide the actual radio button */
+}
+
+    .role-input:checked + .role-label {
+        background-color: #007bff; /* Set your desired selected background color */
+        color: #fff; /* Set your desired selected text color */
+    }
+
+.role-dropdown {
+    width: 150px;
+}

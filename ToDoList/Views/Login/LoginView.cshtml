@@ -1,0 +1,116 @@
+﻿
+@{
+    // Retrieve user information from session
+    var userId = Session["UserId"] as int?;
+    var username = Session["Username"] as string;
+    // Check if userId is null
+    if (userId != null)
+    {
+        // Redirect to the login page
+        HttpContext.Current.Response.Redirect("~/List/Index");
+    }
+
+}
+@{
+    ViewBag.Title = "Login";
+}
+@model ToDoList.Models.User
+
+<style>
+    body {
+        background-color: #343a40;
+        color: #ff6500;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form-section {
+        background-color: #343a40;
+        padding: 15px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 300px; 
+    }
+
+    .control-label {
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+        background-color: #343a40;
+        color: #ff6500;
+    }
+
+    .input-icon {
+        margin-right: 10px;
+        color: #ff6500;
+    }
+
+    .btn-login {
+        background-color: #ff6500;
+        color:white;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .invalid-feedback {
+        color: red;
+        margin-top: 10px;
+    }
+    .notification-container {
+        position: absolute;
+        top: 65px;
+        align-items: center;
+        right: 10px;
+        z-index: 1000;
+    }
+</style>
+
+<div class="form-section">
+    <h2 class="text-center mb-4">Login</h2>
+
+    <div class="form-group">
+        <label class="control-label" for="Username">
+            <span class="input-icon"><i class="fas fa-user"></i></span>Username
+        </label>
+        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", required = "true", placeholder = "Enter your username" })
+        <div class="invalid-feedback">Please enter your username.</div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="Password">
+            <span class="input-icon"><i class="fas fa-lock"></i></span>Password
+        </label>
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control", required = "true", placeholder = "Enter your password" })
+        <div class="invalid-feedback">Please enter your password.</div>
+    </div>
+
+    <button id="btn_login" class="btn-login" onclick="validate();">Login</button>
+</div>
+<div class="notification-container"></div>
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" defer></script>
+    <script src="~/Scripts/Login.js" defer></script>
+}
