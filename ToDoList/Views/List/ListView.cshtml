@@ -2,12 +2,15 @@
 @{
     var status = "";
     var visibility = "";
+    var var_class = "";
     // Retrieve user information from session
     var userId = Session["UserId"] as int?;
     var username = Session["Username"] as string;
     var role = Session["role"] as string;
+
     status = (role == "admin") ? "" : "disabled";
     visibility = (role == "admin") ? "" : "style=display:none";
+    var_class = (role == "admin") ? "" : "hidden-link";
     // Check if userId is null
     if (userId == null)
     {
@@ -23,13 +26,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Incrementing Cards</title>
     <link rel="stylesheet" type="text/css" href="~/Content/CardsStyle.css">
+    <style>
+        #hidden-link {
+            display: none;
+        }
+    </style>
+  
 </head>
 <body>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="/List/Index">Dashboard</a>
-        <a href="/User/Index">User</a>
+        <a href="/User/Index"  id=@var_class >User</a>
         <!-- Add more sidebar links as needed -->
     </div>
 
@@ -80,30 +89,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" defer></script>
         <script src="~/Scripts/List.js" defer></script>
         <script>
-            function logout() {
-                window.location.href = "/Login/Logout";
-            }
-            function remove_list(id) {
-
-                $.ajax({
-                    type: "POST",
-                    url: "/List/Delete",
-                    data: {
-                        list_id: id
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            $("#list_" + id).closest(".col-md-4").fadeOut("slow", function () {
-                                $(this).remove();
-                            });
-                        }
-                        console.log(data.success);
-                    },
-                    error: function (error) {
-                        console.error(error);
-                    }
-                });
-            }
+            
         </script>
     }
 </body>
