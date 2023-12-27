@@ -35,7 +35,7 @@ function insert_user() {
                         updatedRowRole = "<td><select name='role' id='role_" + data.id + "' class='form-control'><option value='admin'>admin</option><option value='user' selected>user</option></select></td>";
                     }
 
-                    var newRow = "<tr>" +
+                  /*  var newRow = "<tr>" +
                         "<td><input type='text' id='user_id_" + data.id + "' name='user_id' value='" + data.id + "' class='form-control hidden' readonly /></td>" +
                         "<td><input type='text' id='username_" + data.id + "' name='username' value='" + data.added_username + "' class='form-control' /></td>" +
                         "<td><input type='password' id='password_" + data.id + "' value='" + data.added_password + "' name='password' class='form-control' /></td>" +
@@ -49,9 +49,53 @@ function insert_user() {
                         "</button>" +
                         "</div>" +
                         "</td>" +
+                        "</tr>";*/
+                    var newPasswordRow = "<tr>" +
+                        "<td id='user_id_"+data.id+"'>"+data.id+"</td>" +
+                        "<td><input type='text' id='username_" + data.id + "' name='username' value='" + data.added_username + "' class='form-control' /></td>" +
+                        "<td>" +
+                        "<div class='input-group'>" +
+                        "<input type='password' id='password_" + data.id + "' value='" + data.added_password + "' name='password' class='form-control' />" +
+                        "<div class='input-group-append'>" +
+                        "<span class='input-group-text' style='cursor: pointer;' data-toggle='modal' data-target='#passwordModal_" + data.id + "'>" +
+                        "<i class='fas fa-lock'></i>" +
+                        "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        updatedRowRole +
+                        "<td>" +
+                        "<div class='btn-group'>" +
+                        "<button class='btn btn-upd btn-sm' onclick='update_user(" + data.id + ");'>" +
+                        "<i class='fas fa-edit'></i>" +
+                        "</button>" +
+                        "<button class='btn btn-danger btn-sm ml-2' onclick='remove_user(" + data.id + ");' style='color: white; background-color: #dc3545;'>" +
+                        "<i class='fas fa-trash'></i>" +
+                        "</button>" +
+                        "</div>" +
+                        "</td>" +
                         "</tr>";
-
-                    $("#rows_user").append(newRow);
+                    // Modal structure for each user
+                  var modalStructure = "<div class='modal fade' id='passwordModal_" + data.id + "' tabindex='-1' role='dialog' aria-labelledby='passwordModalLabel_" + data.id + "' aria-hidden='true'>" +
+                        "<div class='modal-dialog' role='document'>" +
+                        "<div class='modal-content'>" +
+                        "<div class='modal-header'>" +
+                        "<h5 class='modal-title' id='passwordModalLabel_" + data.id + "'>Password Modal</h5>" +
+                        "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+                        "<span aria-hidden='true'>&times;</span>" +
+                        "</button>" +
+                        "</div>" +
+                        "<div class='modal-body'>" +
+                        "<p class='password-info'>Password for user " + data.added_username + ": " + data.added_password + "</p>" +
+                        "</div>" +
+                        "<div class='modal-footer'>" +
+                        "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+                    $("#rows_user").append(newPasswordRow);
+                    $("body").append(modalStructure);
                     $("#username_0").val("");
                     $("#password_0").val("");
 
@@ -90,6 +134,48 @@ function remove_user(id_user) {
             console.error(error);
         }
     });
+}
+function update_user(id_user) {
+    var username = $("#username_" + id_user).val();
+    var role = $("#role_" + id_user).val();   
+    var password = $("#password_" + id_user).val();
+    if (username != "" && password != "" && role != "") {
+
+
+        $.ajax({
+            type: "POST",
+            url: "/User/Edit",
+            data: {
+                user_id: id_user,
+                username: username,
+                password: password,
+                role: role
+            },
+            success: function (data) {
+
+                if (data.success) {
+                    // Show success notification
+                    showNotification("User Updated successfully!", "success");
+                   $("#value_for_" + id_user).empty();
+                    $("#value_for_" + id_user).append("Password for user <b>" + data.new_username + "</b>: " + data.new_password);
+                } else {
+                    showNotification("Failed To Update!", "danger");
+                }
+               
+            },
+            error: function (error) {
+                console.error(error);
+            }
+
+            });
+
+    }
+   
+
+    
+
+
+
 }
 
 // Function to show notifications

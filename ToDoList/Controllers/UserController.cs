@@ -92,5 +92,36 @@ namespace ToDoList.Controllers
                 return Json(new { success = false, message = "An error occurred while updating the student" });
             }
         }
+        [HttpPost]
+        public ActionResult Edit(int user_id,string username,string password,string role)
+        {
+            try
+            {
+                // Your update logic here
+                // For example, you might use a service or repository to update the student in the database
+                // Make sure to implement proper error handling and validation as needed
+
+                // Sample update logic
+                var userToUpdate = _context.User.Find(user_id);
+                if (userToUpdate != null)
+                {
+                    userToUpdate.Username = username;
+                    userToUpdate.Password = password;
+                    userToUpdate.Role = role;
+                    _context.SaveChanges();
+
+                    return Json(new { success = true, message = "User Updated successfully",new_password=password, new_username = username });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "User not found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                return Json(new { success = false, message = "An error occurred while updating the student" });
+            }
+        }
     }
 }

@@ -90,7 +90,30 @@ function remove_list(id) {
         }
     });
 }
+function logout() {
+    window.location.href = "/Login/Logout";
+}
+function remove_list(id) {
 
+    $.ajax({
+        type: "POST",
+        url: "/List/Delete",
+        data: {
+            list_id: id
+        },
+        success: function (data) {
+            if (data.success) {
+                $("#list_" + id).closest(".col-md-4").fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }
+            console.log(data.success);
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+}
 // Function to show notifications
 function showNotification(message, type) {
     var notificationContainer = $(".notification-container");
