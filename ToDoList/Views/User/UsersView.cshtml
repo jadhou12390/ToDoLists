@@ -22,7 +22,7 @@
 }
 
 @model List<ToDoList.Models.User>
-<link rel="stylesheet" type="text/css" href="~/Content/styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/userStyling.css">
 <style>
     .password-info {
         color: #000; /* Set the desired text color */
@@ -75,7 +75,7 @@
 
             </div>
             <div id="table_user" class="mt-4">
-                <table class="table">
+                <table class="table table-responsive">
                     <thead class="thead-dark">
                         <tr>
                             <th style="color: white;">ID</th>
@@ -138,26 +138,26 @@
                             </tr>
 
                             <!-- Modal for each user -->
-                            <div class="modal fade" id="passwordModal_@user.Id" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel_@user.Id" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="passwordModalLabel_@user.Id">Password Modal</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- Add your modal content here -->
-                                            <p class="password-info" id="value_for_@user.Id">Password for user <b>@user.Username</b>: @user.Password</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                                            <!-- Add additional modal buttons as needed -->
-                                        </div>
-                                    </div>
+                    <div class="modal fade" id="passwordModal_@user.Id" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel_@user.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="passwordModalLabel_@user.Id">Password Modal</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your modal content here -->
+                                    <p class="password-info" id="value_for_@user.Id">Password for user <b>@user.Username</b>: @user.Password</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- Add additional modal buttons as needed -->
                                 </div>
                             </div>
+                        </div>
+                    </div>
                         }
 
                     </tbody>

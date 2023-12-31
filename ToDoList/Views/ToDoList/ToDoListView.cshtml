@@ -34,12 +34,13 @@
                 <label for="task_name_0" style="color: gray;">Add a New Task</label>
                 <div class="row align-items-center">
                     <div class="col">
-                        @Html.TextBoxFor(model => new ToDoList.Models.ToDoTask().TaskName, new { @class = "form-control", required = "true", @id = "task_name_0" })
+                        @Html.TextBoxFor(model => new ToDoList.Models.ToDoTask().TaskName, new { @class = "form-control", required = "true", @id = "task_name_0", @placeholder = "Enter Task Name" })
                     </div>
-                    <div class="col-auto pl-0">
+                    <div class="col-auto mt-3 pl-0">
                         <button class="btn btn-crt btn-block" onclick="insert_task();" @status style="color: black;">&plus;</button>
                     </div>
                 </div>
+           
 
                 <div class="invalid-feedback" style="color: red;">
                     Please enter a task name.
@@ -47,7 +48,7 @@
 
             </div>
             <div id="table_task" class="mt-4">
-                <table class="table">
+                <table class="table table-responsive">
                     <thead class="thead-dark">
                         <tr>
                             <th style="color: white;">ID</th>
@@ -64,7 +65,7 @@
 
                                 <td><input type="text" id="task_id_@ToDoItem.Id" name="task_id" value="@ToDoItem.Id" class="form-control hidden" readonly /></td>
                                 <td><input type="text" id="task_name_@ToDoItem.Id" name="task_name" value="@ToDoItem.TaskName" class="form-control" /></td>
-                                <td><input type="checkbox" id="check_task_@ToDoItem.Id" checked="@ToDoItem.IsCompleted" /></td>
+                                <td style="width: 150px;"><input type="checkbox" id="check_task_@ToDoItem.Id" checked="@ToDoItem.IsCompleted" /></td>
                                 <td>
                                     <div class="btn-group">
                                         <button class="btn btn-upd btn-sm" onclick="update_task(@ToDoItem.Id);">

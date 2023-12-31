@@ -43,7 +43,7 @@
 }
 
 .sidebar {
-    position:fixed;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -51,6 +51,8 @@
     background-color: #485056;
     padding-top: 56px;
     color: white;
+    z-index: 1000; /* Ensure the sidebar is above other content */
+    transition: width 0.3s ease;
 }
 
     .sidebar a {
@@ -63,7 +65,14 @@
         .sidebar a:hover {
             background-color: #ffcc80;
         }
+/*.collapsed-sidebar #mainContent {
+    margin-left: 0;  Adjust as needed 
+}
 
+ Add a class to adjust the sidebar width when collapsed 
+.collapsed-sidebar .sidebar {
+    width: 56px;  Adjust as needed 
+}*/
 #sidebarToggle {
     position: fixed;
     top: 10px;
@@ -108,4 +117,20 @@
         right: 10px;
         z-index: 1001;
     }
+   /* .sidebar {
+        width: 0;
+        overflow: hidden;
+    }
+
+    .collapsed-sidebar .sidebar {
+        width: 56px;
+    }
+
+    .collapsed-sidebar #mainContent {
+        margin-left: 0;
+    }
+
+    #sidebarToggle {
+        display: block;
+    }*/
 }

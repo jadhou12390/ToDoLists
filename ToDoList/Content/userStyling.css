@@ -1,0 +1,113 @@
+﻿body {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.form-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+    .form-group label {
+        color: gray;
+    }
+
+    .form-group .btn-crt {
+        background-color: #ff6500;
+        color: black;
+    }
+
+.notification-container {
+    position: absolute;
+    top: 65px;
+    align-items: center;
+    right: 10px;
+    z-index: 1000;
+}
+
+
+.thead-dark th {
+    color: white;
+}
+
+.btn-upd {
+    background-color: #ff6500 !important;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    color: white;
+}
+
+.role-radio {
+    margin-top: 8px; /* Adjust as needed */
+}
+
+.role-label {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #e9ecef; /* Set your desired background color */
+    border-radius: 4px;
+    margin-right: 10px; /* Adjust as needed */
+    cursor: pointer;
+}
+
+.role-input {
+    display: none; /* Hide the actual radio button */
+}
+
+    .role-input:checked + .role-label {
+        background-color: #007bff; /* Set your desired selected background color */
+        color: #fff; /* Set your desired selected text color */
+    }
+
+.role-dropdown {
+    width: 150px;
+}
+/* Style for modal content */
+.modal-content {
+    background-color: #f8f9fa; /* Set your desired background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for modal header */
+.modal-header {
+    background-color: #343a40; /* Set your desired background color */
+    color: white;
+    border-bottom: 1px solid #dee2e6; /* Set your desired border color */
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Style for modal title */
+.modal-title {
+    color: #ff6500; /* Set your desired text color */
+}
+
+/* Style for modal body */
+.modal-body {
+    padding: 15px;
+}
+
+/* Style for modal footer */
+.modal-footer {
+    border-top: 1px solid #dee2e6; /* Set your desired border color */
+    padding: 15px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Style for close button */
+.close {
+    color: white; /* Set your desired text color */
+    font-size: 1.5rem;
+}
+
+    /* Style for close button on hover */
+    .close:hover {
+        color: #ff6500; /* Set your desired hover color */
+    }
