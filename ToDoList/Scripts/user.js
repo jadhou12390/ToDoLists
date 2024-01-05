@@ -156,19 +156,21 @@ function update_user(id_user) {
                 if (data.success) {
                     // Show success notification
                     showNotification("User Updated successfully!", "success");
-                   $("#value_for_" + id_user).empty();
+                    $("#value_for_" + id_user).empty();
                     $("#value_for_" + id_user).append("Password for user <b>" + data.new_username + "</b>: " + data.new_password);
                 } else {
                     showNotification("Failed To Update!", "danger");
                 }
-               
+
             },
             error: function (error) {
                 console.error(error);
             }
 
-            });
+        });
 
+    } else {
+        alert("وداد")
     }
    
 

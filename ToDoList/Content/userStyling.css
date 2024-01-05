@@ -111,3 +111,14 @@
     .close:hover {
         color: #ff6500; /* Set your desired hover color */
     }
+.custom-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .custom-table th,
+    .custom-table td {
+        white-space: nowrap;
+    }
+}

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     // Retrieve user information from session
     var userId = Session["UserId"] as int?;
     var username = Session["Username"] as string;
@@ -9,7 +8,6 @@
         // Redirect to the login page
         HttpContext.Current.Response.Redirect("~/List/Index");
     }
-
 }
 @{
     ViewBag.Title = "Login";
@@ -27,6 +25,7 @@
         align-items: center;
         height: 100vh;
     }
+
     .container {
         display: flex;
         justify-content: center;
@@ -39,7 +38,7 @@
         padding: 15px;
         border-radius: 8px;
         width: 100%;
-        max-width: 300px; 
+        max-width: 300px;
     }
 
     .control-label {
@@ -67,7 +66,7 @@
 
     .btn-login {
         background-color: #ff6500;
-        color:white;
+        color: white;
         width: 100%;
         padding: 10px;
         border: none;
@@ -79,6 +78,7 @@
         color: red;
         margin-top: 10px;
     }
+
     .notification-container {
         position: absolute;
         top: 65px;
@@ -108,8 +108,11 @@
     </div>
 
     <button id="btn_login" class="btn-login" onclick="validate();">Login</button>
+
+ 
 </div>
 <div class="notification-container"></div>
+
 @section scripts {
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" defer></script>
     <script src="~/Scripts/Login.js" defer></script>

@@ -1,4 +1,5 @@
-﻿function validate() {
+﻿// Function to validate user login
+function validate() {
     var username = $('#Username').val();
     var password = $('#Password').val();
 
@@ -9,14 +10,21 @@
             data: { username: username, password: password },
             success: function (result) {
                 console.log(result);
-                // Show success notification
-                showNotification(result.message, "success");
 
-                // Redirect to the desired page
-                window.location.href = '/List/Index';
+                if (result.success) {
+                    // Show success notification
+                    showNotification(result.message, "success");
+
+                    // Redirect to the desired page
+                    window.location.href = '/List/Index';
+                } else {
+                    // Show error notification for user not found
+                    showNotification(result.message, "error");
+                }
             },
             error: function (error) {
                 console.error(error);
+
                 // Show error notification
                 showNotification("Authentication failed. Please check your username and password.", "error");
             }

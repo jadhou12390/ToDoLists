@@ -65,3 +65,13 @@
 .role-dropdown {
     width: 150px;
 }
+.custom-table {
+    width: 100%;
+    overflow-x: auto;
+}
+@media (max-width: 768px) {
+    .custom-table th,
+    .custom-table td {
+        white-space: nowrap;
+    }
+}
