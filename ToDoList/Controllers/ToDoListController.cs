@@ -18,15 +18,42 @@ namespace ToDoList.Controllers
         [HttpGet]
         public ActionResult Index(int listId)
         {
-            var tasksForList = _context.ToDoTasks
-        .Where(tasks => tasks.ListId == listId)
-        .Include(task => task.User) // Include user information
-        .ToList();
-            var users = _context.User.Where(user =>user.Role !="admin").ToList(); // Replace this with your actual user retrieval logic
+            //accesing on session
+            var role = Session["role"] as string;
+            var userId = Session["UserId"] as int?;
+            if (role == "admin")
+            {
+                var tasksForList = _context.ToDoTasks
+              .Where(tasks => tasks.ListId == listId)
+              .Include(task => task.User) // Include user information
+              .ToList();
+                var users = _context.User.Where(user => user.Role != "admin").ToList(); // Replace this with your actual user retrieval logic
 
-            ViewBag.Users = users;
+                ViewBag.Users = users;
 
-            return View("ToDoListView", tasksForList);
+                return View("ToDoListView", tasksForList);
+            }
+            else
+            {
+                var tasksForUser = _context.ToDoTasks
+                 .Where(task => task.ListId == listId && task.userId == userId)
+                 .Include(task => task.User)
+                 .ToList();
+
+                var users = _context.User.Where(user => user.Role != "admin").ToList();
+
+                ViewBag.Users = users;
+
+                return View("ToDoListView", tasksForUser);
+
+
+
+            }
+           
+
+
+           
+           
           
         }
         
