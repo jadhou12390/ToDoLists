@@ -1,0 +1,136 @@
+﻿body {
+    background-color: #343a40;
+    color: #ffcc80; /* Dark orange color */
+}
+
+.custom-card {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+    .custom-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-card button {
+        background-color: #ff6500;
+        color: white;
+    }
+
+        .custom-card button:hover {
+            background-color: #ffcc80;
+        }
+
+.btn-view {
+    background-color: #485056;
+    color: #ff6500;
+    margin-right: 5px;
+}
+
+    .btn-view:hover {
+        background-color: #ffcc80;
+    }
+
+.btn-del {
+    background-color: #ff6500;
+    margin-left: 5px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #485056;
+    padding-top: 56px;
+    color: white;
+    z-index: 1000; /* Ensure the sidebar is above other content */
+    transition: width 0.3s ease;
+}
+
+    .sidebar a {
+        padding: 10px;
+        text-decoration: none;
+        color: #ff6500;
+        display: block;
+    }
+
+        .sidebar a:hover {
+            background-color: #ffcc80;
+        }
+/*.collapsed-sidebar #mainContent {
+    margin-left: 0;  Adjust as needed 
+}
+
+ Add a class to adjust the sidebar width when collapsed 
+.collapsed-sidebar .sidebar {
+    width: 56px;  Adjust as needed 
+}*/
+#sidebarToggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+#mainContent {
+    width: 100%;
+    padding-top: 56px;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.logout-container {
+    position:absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.notification-container {
+    position: absolute;
+    top: 65px;
+    align-items:center;
+    right:10px;
+    z-index: 1000;
+}
+
+@media (min-width: 768px) {
+    .container-fluid {
+        padding-left: 120px;
+    }
+
+    .logout-container {
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+    }
+   /* .sidebar {
+        width: 0;
+        overflow: hidden;
+    }
+
+    .collapsed-sidebar .sidebar {
+        width: 56px;
+    }
+
+    .collapsed-sidebar #mainContent {
+        margin-left: 0;
+    }
+
+    #sidebarToggle {
+        display: block;
+    }*/
+}

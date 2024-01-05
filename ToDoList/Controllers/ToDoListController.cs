@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,8 +18,16 @@ namespace ToDoList.Controllers
         [HttpGet]
         public ActionResult Index(int listId)
         {
-            var tasksForList = _context.ToDoTasks.Where(tasks => tasks.ListId == listId).ToList();
+            var tasksForList = _context.ToDoTasks
+        .Where(tasks => tasks.ListId == listId)
+        .Include(task => task.User) // Include user information
+        .ToList();
+            var users = _context.User.Where(user =>user.Role !="admin").ToList(); // Replace this with your actual user retrieval logic
+
+            ViewBag.Users = users;
+
             return View("ToDoListView", tasksForList);
+          
         }
         
        
@@ -31,11 +40,13 @@ namespace ToDoList.Controllers
                 {
                     TaskName = viewModel.TaskName,
                     IsCompleted = viewModel.IsCompleted,
-                    ListId = viewModel.ListId
+                    ListId = viewModel.ListId,
+                    userId=viewModel.userId
                 };
 
                 _context.ToDoTasks.Add(newToDoTask);
                 _context.SaveChanges();
+            
 
                 return Json(new { success = true, id = newToDoTask.Id, isCompleted = newToDoTask.IsCompleted });
             }
@@ -72,8 +83,14 @@ namespace ToDoList.Controllers
                 return Json(new { success = false, message = "An error occurred while updating the student" });
             }
         }
+        [HttpGet]
+        public ActionResult GetAllUsers()
+        {
+            var users = _context.User.Where(user => user.Role != "admin").ToList();
+            return Json(users, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
-        public ActionResult Edit(int task_id,string task_name,bool isCompleted)
+        public ActionResult Edit(int task_id,string task_name,int userId, bool isCompleted)
         {
 
             try
@@ -88,8 +105,9 @@ namespace ToDoList.Controllers
                 {
                     taskToUpdate.TaskName = task_name;
                     taskToUpdate.IsCompleted = isCompleted;
+                    taskToUpdate.userId = userId;
                     _context.SaveChanges();
-
+                   
                     return Json(new { success = true, message = "Task Updated successfully" });
                 }
                 else

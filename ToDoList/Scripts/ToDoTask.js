@@ -1,6 +1,7 @@
 function update_task(task_id) {
     var task_name = $("#task_name_" + task_id).val();
-    if (task_name != "") {
+    var user_id = $("#user_id_" + task_id).val();
+    if (task_name != "" && user_id!=null ) {
         var isChecked = $("#check_task_" + task_id).is(':checked').toString();
 
         $.ajax({
@@ -9,6 +10,7 @@ function update_task(task_id) {
             data: {
                 task_id: task_id,
                 task_name: task_name,
+                userId:user_id,
                 isCompleted: isChecked
             },
             success: function (data) {
@@ -32,6 +34,7 @@ function insert_task() {
     var txt_task = $("#task_name_0").val();
     var urlParams = new URLSearchParams(window.location.search);
     var id_list = urlParams.get('listId');
+    var user_id = $("#users").val();
 
     if (!id_list) {
         console.error("ListId not found in the URL.");
@@ -45,35 +48,55 @@ function insert_task() {
             data: {
                 TaskName: txt_task,
                 IsCompleted: false,
-                ListId: id_list
+                ListId: id_list,
+                userId: user_id
             },
             success: function (data) {
-                console.log(data);
-                console.log(data.success);
                 if (data.success) {
-                    var newRow = "<tr>" +
-                        "<td><input type='text' id='task_id_" + data.id + "' name='task_id' value='" + data.id + "' class='form-control hidden' readonly /></td>" +
-                        "<td><input type='text' id='task_name_" + data.id + "' name='task_name' value='" + txt_task + "' class='form-control' /></td>" +
-                        "<td><input type='checkbox' id='check_task_" + data.id + "' " + (data.isCompleted ? 'checked' : '') + " /></td>" +
-                        "<td>" +
-                        "<div class='btn-group'>" +
-                        "<button class='btn btn-upd btn-sm' onclick='update_task(" + data.id + ");'>" +
-                        "<i class='fas fa-edit'></i>" +
-                        "</button>" +
-                        "<button class='btn btn-danger btn-sm ml-2' onclick='remove_task(" + data.id + ");' style='color: white; background-color: #dc3545;'>" +
-                        "<i class='fas fa-trash'></i>" +
-                        "</button>" +
-                        "</div>" +
-                        "</td>" +
-                        "</tr>";
-                    console.log(newRow);
-                    $("#rows_task").append(newRow);
+                    // Fetch all users and update the dropdown list
+                    $.ajax({
+                        type: "GET",
+                        url: "/ToDoList/GetAllUsers",
+                        success: function (usersData) {
+                            // Generate HTML options for all users
+                            var userOptions = usersData.map(user => `<option value="${user.Id}">${user.Username}</option>`).join('');
 
-                    // Clear the input field
-                    $("#task_name_0").val("");
+                            // Update the dropdown list for the newly added task
+                            var newUserOption = `<option value="${user_id}" selected>${$("#users option:selected").text()}</option>`;
+                            $("#user_id_" + data.id).html(newUserOption + userOptions);
+                            var newRow = "<tr>" +
+                                "<td><input type='text' id='task_id_" + data.id + "' name='task_id' value='" + data.id + "' class='form-control hidden' readonly /></td>" +
+                                "<td><input type='text' id='task_name_" + data.id + "' name='task_name' value='" + txt_task + "' class='form-control' /></td>" +
+                                "<td><select name='user_id_' id='user_id_" + data.id + "' class='form-control'>" +
+                                newUserOption + userOptions +
+                                "</select></td>" +
+                                "<td><input type='checkbox' id='check_task_" + data.id + "' " + (data.isCompleted ? 'checked' : '') + " /></td>" +
+                                "<td>" +
+                                "<div class='btn-group'>" +
+                                "<button class='btn btn-upd btn-sm' onclick='update_task(" + data.id + ");'>" +
+                                "<i class='fas fa-edit'></i>" +
+                                "</button>" +
+                                "<button class='btn btn-danger btn-sm ml-2' onclick='remove_task(" + data.id + ");' style='color: white; background-color: #dc3545;'>" +
+                                "<i class='fas fa-trash'></i>" +
+                                "</button>" +
+                                "</div>" +
+                                "</td>" +
+                                "</tr>";
 
-                    // Show success notification
-                    showNotification("Task added successfully!", "success");
+                            $("#rows_task").append(newRow);
+
+                            // Clear the input field
+                            $("#task_name_0").val("");
+
+                            // Show success notification
+                            showNotification("Task added successfully!", "success");
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            console.error("Status: " + status);
+                            console.error("Error: " + error);
+                        }
+                    });
                 } else {
                     console.error(data.message);
                     // Show error notification

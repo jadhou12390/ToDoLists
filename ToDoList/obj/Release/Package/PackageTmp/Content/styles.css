@@ -17,6 +17,14 @@
         background-color: #ff6500;
         color: black;
     }
+.notification-container {
+    position: absolute;
+    top: 65px;
+    align-items: center;
+    right: 10px;
+    z-index: 1000;
+}
+
 
 .thead-dark th {
     color: white;
@@ -30,4 +38,40 @@
 .btn-danger {
     background-color: #dc3545 !important;
     color: white;
+}
+
+.role-radio {
+    margin-top: 8px; /* Adjust as needed */
+}
+
+.role-label {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #e9ecef; /* Set your desired background color */
+    border-radius: 4px;
+    margin-right: 10px; /* Adjust as needed */
+    cursor: pointer;
+}
+
+.role-input {
+    display: none; /* Hide the actual radio button */
+}
+
+    .role-input:checked + .role-label {
+        background-color: #007bff; /* Set your desired selected background color */
+        color: #fff; /* Set your desired selected text color */
+    }
+
+.role-dropdown {
+    width: 150px;
+}
+.custom-table {
+    width: 100%;
+    overflow-x: auto;
+}
+@media (max-width: 768px) {
+    .custom-table th,
+    .custom-table td {
+        white-space: nowrap;
+    }
 }

@@ -156,6 +156,22 @@
     <Compile Include="Migrations\202312171656048_new_mig.designer.cs">
       <DependentUpon>202312171656048_new_mig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401051416060_updated_model.cs" />
+    <Compile Include="Migrations\202401051416060_updated_model.designer.cs">
+      <DependentUpon>202401051416060_updated_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401051454291_updated_model2.cs" />
+    <Compile Include="Migrations\202401051454291_updated_model2.designer.cs">
+      <DependentUpon>202401051454291_updated_model2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401051624526_updated_model9.cs" />
+    <Compile Include="Migrations\202401051624526_updated_model9.designer.cs">
+      <DependentUpon>202401051624526_updated_model9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401051626133_updated_model0.cs" />
+    <Compile Include="Migrations\202401051626133_updated_model0.designer.cs">
+      <DependentUpon>202401051626133_updated_model0.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\List.cs" />
@@ -271,6 +287,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312171656048_new_mig.resx">
       <DependentUpon>202312171656048_new_mig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401051416060_updated_model.resx">
+      <DependentUpon>202401051416060_updated_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401051454291_updated_model2.resx">
+      <DependentUpon>202401051454291_updated_model2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401051624526_updated_model9.resx">
+      <DependentUpon>202401051624526_updated_model9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401051626133_updated_model0.resx">
+      <DependentUpon>202401051626133_updated_model0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

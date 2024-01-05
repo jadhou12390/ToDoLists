@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "UsersView";
+}
+@{
+    var status = "";
+    // Retrieve user information from session
+    var userId = Session["UserId"] as int?;
+    var username = Session["Username"] as string;
+    var role = Session["role"] as string;
+    status = (role == "admin") ? "" : "disabled";
+    // Check if userId is null
+    if (userId == null)
+    {
+        // Redirect to the login page
+        HttpContext.Current.Response.Redirect("~/Login/Index");
+    }
+    if (role != "admin")
+    {
+        HttpContext.Current.Response.Redirect("~/List/Index");
+    }
+}
+
+@model List<ToDoList.Models.User>
+<link rel="stylesheet" type="text/css" href="~/Content/userStyling.css">
+<style>
+    .password-info {
+        color: #000; /* Set the desired text color */
+    }
+
+
+</style>
+<h4 class="text-center mt-4" style="color: #ff6500;">User's Management</h4>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="text-left mb-3">
+                <a href="@Url.Action("Index", "List")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+            <div class="form-group" style="background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+                <label for="task_name_0" style="color: gray;">Add a New User</label>
+                <div class="row align-items-center">
+                    <div class="col">
+                        @Html.TextBoxFor(model => new ToDoList.Models.User().Username, new { @class = "form-control", required = "true", @id = "username_0", @placeholder = "Enter Username" })
+                        <label for="password_0" class="mt-2" style="color: gray;">Password</label>
+                        <input type="password" name="password_0" id="password_0" placeholder="Enter Password" required class="form-control" />
+
+                        <div class="mt-3">
+                            <label class="mr-2" style="color: gray;">Role:</label>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="role_0" id="role_admin_0" value="admin">
+                                <label class="form-check-label" for="role_admin_0">Admin</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="role_0" id="role_user_0" value="user">
+                                <label class="form-check-label" for="role_user_0">User</label>
+                            </div>
+                        </div>
+
+                        <div class="col-auto mt-3 pl-0">
+                            <button class="btn btn-crt btn-block" onclick="insert_user();" @status style="color: black;">&plus;</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="invalid-feedback" style="color: red;">
+                    Please enter a user information.
+                </div>
+
+            </div>
+            <div id="table_user" class="mt-4">
+                <table class="table custom-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="color: white;">ID</th>
+                            <th style="color: white;">Username</th>
+                            <th style="color: white;">Password</th>
+                            <th style="color: white;">Role</th>
+                            <th style="color: white;">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="rows_user">
+                        @foreach (var user in Model)
+                        {
+
+                            <tr>
+                                <td id="user_id_@user.Id">@user.Id</td>
+                                <td><input type="text" id="username_@user.Id" name="username" value="@user.Username" class="form-control" /></td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="password" id="password_@user.Id" value="@user.Password" class="form-control" />
+                                        @if (@role == "admin")
+                                        {
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" style="cursor: pointer;" data-toggle="modal" data-target="#passwordModal_@user.Id">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </td>
+                                @if (user.Role == "admin")
+                                {
+                                    <td>
+                                        <select name="role_@user.Role" id="role_@user.Id" class="form-control role-dropdown" style="width: 150px;">
+                                            <option value="admin" selected>admin</option>
+                                            <option value="user">user</option>
+                                        </select>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <select name="role_@user.Role" id="role_@user.Id" class="form-control role-dropdown" style="width: 150px;">
+                                            <option value="admin">admin</option>
+                                            <option value="user" selected>user</option>
+                                        </select>
+                                    </td>
+                                }
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-upd btn-sm" onclick="update_user(@user.Id);">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm ml-2" onclick="remove_user(@user.Id);" @status style="color: white; background-color: #dc3545;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Modal for each user -->
+                    <div class="modal fade" id="passwordModal_@user.Id" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel_@user.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="passwordModalLabel_@user.Id">Password Modal</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your modal content here -->
+                                    <p class="password-info" id="value_for_@user.Id">Password for user <b>@user.Username</b>: @user.Password</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- Add additional modal buttons as needed -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="notification-container"></div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="~/Scripts/user.js"></script>
+}

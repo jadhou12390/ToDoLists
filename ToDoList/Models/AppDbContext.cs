@@ -14,6 +14,7 @@ namespace ToDoList.Models
         public DbSet<List> List { get; set; }
         public AppDbContext() : base("my_connection")
         {
+           
             // YourDatabaseConnectionString should match the name in your connectionStrings section in web.config
         }
     }
