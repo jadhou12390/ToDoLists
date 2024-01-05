@@ -4,19 +4,32 @@ function validate() {
     var password = $('#Password').val();
 
     if (username !== "" && password !== "") {
+        // Show the progress bar
+       
+
         $.ajax({
             url: '/Login/Auth',
             type: 'POST',
             data: { username: username, password: password },
             success: function (result) {
-                console.log(result);
+                
 
                 if (result.success) {
                     // Show success notification
                     showNotification(result.message, "success");
 
-                    // Redirect to the desired page
-                    window.location.href = '/List/Index';
+                    // Redirect to the desired page after a brief delay
+                    $("#progress-bar").show();
+                    var rotationDegree = 0;
+                    setInterval(function () {
+                        rotationDegree = (rotationDegree + 20) % 360;
+                        $("#progress-bar").css("transform", "translate(-50%, -50%) rotate(" + rotationDegree + "deg)");
+                    }, 50); // You can adjust the rotation speed
+                    setTimeout(function () {
+                       
+                        window.location.href = '/List/Index';
+                        $("#progress-bar").hide();
+                    }, 5000); // Adjust the delay time as needed
                 } else {
                     // Show error notification for user not found
                     showNotification(result.message, "error");
@@ -27,6 +40,10 @@ function validate() {
 
                 // Show error notification
                 showNotification("Authentication failed. Please check your username and password.", "error");
+            },
+            complete: function () {
+                // Hide the progress bar after the action is completed
+               
             }
         });
     } else {
@@ -34,6 +51,7 @@ function validate() {
         showNotification("Username and password are required!", "error");
     }
 }
+
 
 // Function to show notifications
 function showNotification(message, type) {
