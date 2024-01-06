@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\User\Desktop\New folder</_PublishTargetUrl>
-    <History>True|2024-01-05T13:10:34.4069117Z;True|2023-12-18T11:58:36.8927979+02:00;True|2023-12-18T11:56:37.7800195+02:00;</History>
+    <History>True|2024-01-05T20:05:50.2496966Z;True|2024-01-05T21:49:12.7743831+02:00;True|2024-01-05T15:10:34.4069117+02:00;True|2023-12-18T11:58:36.8927979+02:00;True|2023-12-18T11:56:37.7800195+02:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -199,10 +199,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2024 12:22:25</publishTime>
     </File>
     <File Include="bin/ToDoList.dll">
-      <publishTime>01/05/2024 15:10:33</publishTime>
+      <publishTime>01/05/2024 21:49:11</publishTime>
     </File>
     <File Include="bin/ToDoList.pdb">
-      <publishTime>01/05/2024 15:10:33</publishTime>
+      <publishTime>01/05/2024 21:49:11</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/05/2024 12:22:26</publishTime>
@@ -397,7 +397,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2024 12:22:25</publishTime>
     </File>
     <File Include="Scripts/ToDoTask.js">
-      <publishTime>01/05/2024 12:22:25</publishTime>
+      <publishTime>01/05/2024 19:10:56</publishTime>
     </File>
     <File Include="Scripts/user.js">
       <publishTime>01/05/2024 12:22:25</publishTime>
@@ -412,7 +412,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2024 12:22:25</publishTime>
     </File>
     <File Include="Views/List/ListView.cshtml">
-      <publishTime>01/05/2024 12:22:25</publishTime>
+      <publishTime>01/05/2024 21:13:47</publishTime>
     </File>
     <File Include="Views/Login/LoginView.cshtml">
       <publishTime>01/05/2024 14:36:36</publishTime>
@@ -424,7 +424,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2024 12:22:25</publishTime>
     </File>
     <File Include="Views/ToDoList/ToDoListView.cshtml">
-      <publishTime>01/05/2024 12:22:25</publishTime>
+      <publishTime>01/05/2024 21:29:45</publishTime>
     </File>
     <File Include="Views/User/UsersView.cshtml">
       <publishTime>01/05/2024 12:22:25</publishTime>
@@ -436,7 +436,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2024 12:22:25</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/05/2024 15:10:33</publishTime>
+      <publishTime>01/05/2024 21:49:12</publishTime>
     </File>
   </ItemGroup>
 </Project>
