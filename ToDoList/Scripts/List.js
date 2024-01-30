@@ -15,8 +15,8 @@
                     // Assuming that data.list contains the newly added list details
                     newCard.innerHTML = `
                         <div class="card custom-card">
-                            <div class="card-body" id="list_${data.id}" style="height: 150px; overflow: hidden;">
-                                <h5 class="card-title">${data.id}</h5>
+                            <div class="card-body" id="list_${data.id}">
+                               
                                 <p class="card-text">${data.added_name}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="/ToDoList/index?listId=${data.id}" class="btn btn-view">
